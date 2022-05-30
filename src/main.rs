@@ -1,17 +1,14 @@
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize, Debug)]
-struct Point {
-    x: i32,
-    y: i32,
-}
+#[tokio::main]
+async fn main() -> Result<(), reqwest::Error> {
+    let todos = reqwest::Client::new()
+        .get("https://jsonplaceholder.typicode.com/todos/1?userdId=1")
+        .send()
+        .await?
+        .text()
+        .await?;
 
-fn main() {
-    let point = Point { x: 1, y: 2 };
-
-    let serialized = serde_json::to_string(&point).unwrap();
-    println!("serialized = {}", serialized);
-
-    let deserialized: Point = serde_json::from_str(&serialized).unwrap();
-    println!("deserialized = {:?}", deserialized);
+    println!("{:?}", todos);
+    Ok(())
 }
