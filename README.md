@@ -1,3 +1,5 @@
 # rust_serde_app
 
-Learning serde
+App to download some json using serde and reqwest and deserialize it using serde.
+
+Data downloaded from https://jsonplaceholder.typicode.com/
